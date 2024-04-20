@@ -1,11 +1,13 @@
 package life.course.pk1.Models;
 
 public class Student {
-    /*private int id;
+    private int id;
+    private String email;
     private String fio;
     private String faculty;
-    private String departmen;
+    private String department;
     private String groupe;
+    private String password;
     private String about;
     private String photo;
 
@@ -33,12 +35,12 @@ public class Student {
         this.faculty = faculty;
     }
 
-    public String getDepartmen() {
-        return departmen;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDepartmen(String departmen) {
-        this.departmen = departmen;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
     public String getGroupe() {
@@ -63,16 +65,14 @@ public class Student {
 
     public void setPhoto(String photo) {
         this.photo = photo;
-    }*/
-    private String name;
-    private String password;
-
-    public String getName() {
-        return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {

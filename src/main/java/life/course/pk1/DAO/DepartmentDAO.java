@@ -7,9 +7,13 @@ import life.course.pk1.Models.Establishment;
 import life.course.pk1.Utill.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
+<<<<<<< HEAD
 import org.springframework.stereotype.Component;
 
 @Component
+=======
+
+>>>>>>> origin/master
 public class DepartmentDAO {
     private final JdbcTemplate jdbcTemplate;
 

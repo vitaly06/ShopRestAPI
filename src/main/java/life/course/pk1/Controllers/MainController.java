@@ -16,13 +16,7 @@ public class MainController {
     @Autowired
     StudentDAO studentDAO;
     @Autowired
-    EstablishmentDAO establishmentDAO;
-    @Autowired
-    DepartmentDAO departmentDAO;
-    @Autowired
-    FacultyDAO facultyDAO;
-    @Autowired
-    AdminDAO adminDAO;
+    ProductDAO productDAO;
 
     // регистрация пользователя
     @PostMapping("/regUser")
@@ -38,34 +32,12 @@ public class MainController {
         return student;
     }
 
-    // информация о вузе
-    @GetMapping("/getEstablishment/{id}")
-    public Establishment getEstablishment(@PathVariable("id") int id){
-        Establishment establishment = establishmentDAO.getEstablishment(id);
-        return establishment;
-    }
-    // информация о кафедрах
-    @GetMapping("/getDepartment/{id}")
-    public Department getDepartment(@PathVariable("id") int id){
-        Department department = departmentDAO.getDepartment(id);
-        return department;
-    }
-    // информация о факультетах
-    @GetMapping("/getFaculty/{id}")
-    public Faculty getFaculty(@PathVariable("id") int id){
-        Faculty faculty = facultyDAO.getFaculty(id);
-        return faculty;
+    @GetMapping("/getProduct/{id}")
+    public Product getProduct(@PathVariable("id") int id){
+        Product product = productDAO.getProduct(id);
+        return product;
     }
 
-    // получение данных об админе
-    @GetMapping("/getAdmin/{id}")
-    public Admin admin(@PathVariable("id") int id){
-        Admin admin = adminDAO.getAdmin(id);
-        return admin;
-    }
-
-    // добавить админа
-    @PostMapping("/regAdmin")
 
     @ExceptionHandler
     private ResponseEntity<StudentErrorResponse> handleException(StudentNotFoundException e){

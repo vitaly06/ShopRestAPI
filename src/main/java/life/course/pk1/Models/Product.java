@@ -1,6 +1,6 @@
 package life.course.pk1.Models;
 
-import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Blob;
 

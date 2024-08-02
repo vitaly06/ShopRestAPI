@@ -3,7 +3,10 @@ package life.course.pk1.Mappers;
 import life.course.pk1.Models.Product;
 import life.course.pk1.Models.Student;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.support.ByteArrayMultipartFileEditor;
 
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 

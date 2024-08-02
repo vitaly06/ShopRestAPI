@@ -9,6 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.sql.rowset.serial.SerialBlob;
+import java.io.IOException;
+import java.sql.Blob;
+import java.sql.SQLException;
+
 @Component
 public class ProductDAO {
     private final JdbcTemplate jdbcTemplate;
@@ -22,7 +27,7 @@ public class ProductDAO {
         jdbcTemplate = null;
     }
 
-    public int addProduct(Product product){
+    public int addProduct(Product product) throws IOException, SQLException {
         return jdbcTemplate.update("INSERT INTO products(name, image, description) VALUES(?, ?, ?)",
                 product.getName(), product.getImage(), product.getDescription());
     }

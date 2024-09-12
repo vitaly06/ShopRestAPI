@@ -9,6 +9,7 @@ import life.course.pk1.Utill.StudentNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,8 +17,13 @@ import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 import java.awt.*;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin
@@ -53,14 +59,20 @@ public class MainController {
     public String addImagePost(HttpServletRequest request,  @RequestParam("name") String name,
                                @RequestPart("image") MultipartFile file, @RequestParam("description") String description) throws IOException, SQLException, SQLException
     {
-        byte[] bytes = file.getBytes();
-        Blob blob = new SerialBlob(bytes);
-
         Product image = new Product();
         image.setName(name);
+        image.setImage(file);
         image.setDescription(description);
-        image.setImage(blob);
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(image.getImage().getOriginalFilename()));
+        image.setFile(fileName);
+        try {
+            Path path = Paths.get("./src/main/resources/static/data/" + fileName);
+            Files.copy(image.getImage().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         productDAO.addProduct(image);
+
         return "redirect:/";
     }
 

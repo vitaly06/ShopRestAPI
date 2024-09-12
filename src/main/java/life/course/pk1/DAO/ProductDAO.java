@@ -10,9 +10,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.sql.rowset.serial.SerialBlob;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
 
 @Component
 public class ProductDAO {
@@ -28,9 +32,10 @@ public class ProductDAO {
     }
 
     public int addProduct(Product product) throws IOException, SQLException {
-        return jdbcTemplate.update("INSERT INTO products(name, image, description) VALUES(?, ?, ?)",
-                product.getName(), product.getImage(), product.getDescription());
+        return jdbcTemplate.update("INSERT INTO products(name, image, description, file) VALUES(?, ?, ?, ?)",
+                product.getName(), product.getImage(), product.getDescription(), product.getFile());
     }
+
     public Product getProduct(int id){
         return jdbcTemplate.query("SELECT * FROM products WHERE id = ?",  new Object[]{id}, new PrdouctMapper())
                 .stream().findAny().orElseThrow();

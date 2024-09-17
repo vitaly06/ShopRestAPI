@@ -15,26 +15,7 @@ import java.sql.SQLException;
 
 public class PrdouctMapper implements RowMapper<Product> {
     @Override
-    @Primary
     public Product mapRow(ResultSet resultSet, int i) throws SQLException {
-        /*Product product = new Product();
-        String fileName = resultSet.getString("file");
-        product.setDescription(resultSet.getString("description"));
-        product.setId(resultSet.getInt("id"));
-        product.setName(resultSet.getString("name"));
-        try {
-            File file = new File("./src/main/resources/static/data/" + fileName);
-            if (file.exists()) {
-                System.out.println("File Exist => " + file.getName() + " :: " + file.getAbsolutePath());
-            }
-            FileInputStream input = new FileInputStream(file);
-            MultipartFile multipartFile = new MockMultipartFile("file", file.getName(), "text/plain",
-                    IOUtils.toByteArray(input));
-            product.setFile(multipartFile);
-        } catch (IOException e) {
-            System.out.println("Exception => " + e.getLocalizedMessage());
-        }
-        return product;*/
         Product product = new Product();
         String fileName = resultSet.getString("file");
         try {

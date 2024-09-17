@@ -11,6 +11,8 @@ public class Product {
     private MultipartFile file;
     private String description;
 
+    public Product(){}
+
     public int getId() {
         return id;
     }
@@ -40,6 +42,11 @@ public class Product {
     }
 
     public void setFile(MultipartFile file) {
-        this.file = file;
+        try {
+            this.file = file;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
     }
 }

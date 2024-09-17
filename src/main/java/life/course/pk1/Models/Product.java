@@ -8,9 +8,8 @@ import java.sql.Blob;
 public class Product {
     private int id;
     private String name;
-    private MultipartFile image;
+    private MultipartFile file;
     private String description;
-    private String file;
 
     public int getId() {
         return id;
@@ -28,14 +27,6 @@ public class Product {
         this.name = name;
     }
 
-    public MultipartFile getImage() {
-        return image;
-    }
-
-    public void setImage(MultipartFile image) {
-        this.image = image;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -44,10 +35,11 @@ public class Product {
         this.description = description;
     }
 
-    public String getFile() {
+    public MultipartFile getFile() {
         return file;
     }
-    public void setFile(String file) {
+
+    public void setFile(MultipartFile file) {
         this.file = file;
     }
 }

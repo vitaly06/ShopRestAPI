@@ -57,17 +57,16 @@ public class MainController {
 
     @PostMapping("/addProduct")
     public String addImagePost(HttpServletRequest request,  @RequestParam("name") String name,
-                               @RequestPart("image") MultipartFile file, @RequestParam("description") String description) throws IOException, SQLException, SQLException
+                               @RequestPart("file") MultipartFile file, @RequestParam("description") String description) throws IOException, SQLException, SQLException
     {
         Product image = new Product();
         image.setName(name);
-        image.setImage(file);
+        image.setFile(file);
         image.setDescription(description);
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(image.getImage().getOriginalFilename()));
-        image.setFile(fileName);
+        String fileName = StringUtils.cleanPath(Objects.requireNonNull(image.getFile().getOriginalFilename()));
         try {
             Path path = Paths.get("./src/main/resources/static/data/" + fileName);
-            Files.copy(image.getImage().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(image.getFile().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {
             e.printStackTrace();
         }

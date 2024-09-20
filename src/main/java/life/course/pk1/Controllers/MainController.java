@@ -23,6 +23,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 
 @RestController
@@ -54,23 +55,25 @@ public class MainController {
         return product;
     }
 
+    @GetMapping("/getProducts")
+    public List<Product> getProducts(){
+        List<Product> products = productDAO.getProducts();
+        return products;
+    }
+
 
     @PostMapping("/addProduct")
-    public String addImagePost(HttpServletRequest request,  @RequestParam("name") String name,
-                               @RequestPart("file") MultipartFile file, @RequestParam("description") String description) throws IOException, SQLException, SQLException
+    public String addImagePost(HttpServletRequest request,
+                               @RequestParam("name") String name, @RequestPart("photo") MultipartFile photo,
+                               @RequestParam("description") String description) throws IOException, SQLException, SQLException
     {
-        Product image = new Product();
-        image.setName(name);
-        image.setFile(file);
-        image.setDescription(description);
-        String fileName = StringUtils.cleanPath(Objects.requireNonNull(image.getFile().getOriginalFilename()));
-        try {
-            Path path = Paths.get("./src/main/resources/static/data/" + fileName);
-            Files.copy(image.getFile().getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        productDAO.addProduct(image);
+        Product product = new Product();
+
+        byte[] imageData = photo.getBytes();
+        product.setPhoto(imageData);
+        product.setDescription(description);
+        product.setName(name);
+        productDAO.addProduct(product);
 
         return "redirect:/";
     }

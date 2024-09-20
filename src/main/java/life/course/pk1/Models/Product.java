@@ -8,7 +8,7 @@ import java.sql.Blob;
 public class Product {
     private int id;
     private String name;
-    private MultipartFile file;
+    private byte[] photo;
     private String description;
 
     public Product(){}
@@ -37,16 +37,11 @@ public class Product {
         this.description = description;
     }
 
-    public MultipartFile getFile() {
-        return file;
+    public byte[] getPhoto() {
+        return photo;
     }
 
-    public void setFile(MultipartFile file) {
-        try {
-            this.file = file;
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
-
+    public void setPhoto(byte[] photo) {
+        this.photo = photo;
     }
 }

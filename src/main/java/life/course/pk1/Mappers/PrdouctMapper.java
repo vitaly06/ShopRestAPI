@@ -1,7 +1,6 @@
 package life.course.pk1.Mappers;
 
 import life.course.pk1.Models.Product;
-import org.apache.commons.io.IOUtils;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.mock.web.MockMultipartFile;
@@ -17,25 +16,14 @@ public class PrdouctMapper implements RowMapper<Product> {
     @Override
     public Product mapRow(ResultSet resultSet, int i) throws SQLException {
         Product product = new Product();
-        String fileName = resultSet.getString("file");
-        try {
-            File file = new File("./src/main/resources/static/data/" + fileName);
-            /*if (file.exists()) {
-                //System.out.println("File Exist => " + file.getName() + " :: " + file.getAbsolutePath());
-            }*/
-            FileInputStream input = new FileInputStream(file);
-            MultipartFile multipartFile = new MockMultipartFile("file", file.getName(), "text/plain",
-                    IOUtils.toByteArray(input));
-            product.setFile(multipartFile);
-        } catch (IOException e) {
-            System.out.println("Exception => " + e.getLocalizedMessage());
-        }
         try{
             product.setId(resultSet.getInt("id"));
             product.setName(resultSet.getString("name"));
             product.setDescription(resultSet.getString("description"));
+            product.setPhoto(resultSet.getBytes("photo"));
         }
         catch (Exception e){
+            System.out.println(e.getMessage());
             return new Product();
         }
         return product;

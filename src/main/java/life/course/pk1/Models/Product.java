@@ -10,6 +10,7 @@ public class Product {
     private String name;
     private byte[] photo;
     private String description;
+    private int price;
 
     public Product(){}
 
@@ -43,5 +44,13 @@ public class Product {
 
     public void setPhoto(byte[] photo) {
         this.photo = photo;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

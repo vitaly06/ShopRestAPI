@@ -27,8 +27,8 @@ public class ProductDAO {
 
     public int addProduct(Product product) throws IOException, SQLException {
         assert jdbcTemplate != null;
-        return jdbcTemplate.update("INSERT INTO products(name, description, file) VALUES(?, ?, ?)",
-                product.getName(), product.getDescription(), product.getPhoto());
+        return jdbcTemplate.update("INSERT INTO products(name, description, photo, price) VALUES(?, ?, ?, ?)",
+                product.getName(), product.getDescription(), product.getPhoto(), product.getPrice());
     }
 
     public Product getProduct(int id){

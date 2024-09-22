@@ -65,7 +65,8 @@ public class MainController {
     @PostMapping("/addProduct")
     public String addImagePost(HttpServletRequest request,
                                @RequestParam("name") String name, @RequestPart("photo") MultipartFile photo,
-                               @RequestParam("description") String description) throws IOException, SQLException, SQLException
+                               @RequestParam("description") String description,
+                               @RequestParam("price") int price) throws IOException, SQLException, SQLException
     {
         Product product = new Product();
 
@@ -73,6 +74,7 @@ public class MainController {
         product.setPhoto(imageData);
         product.setDescription(description);
         product.setName(name);
+        product.setPrice(price);
         productDAO.addProduct(product);
 
         return "redirect:/";

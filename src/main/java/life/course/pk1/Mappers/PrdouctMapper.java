@@ -1,13 +1,7 @@
 package life.course.pk1.Mappers;
 
 import life.course.pk1.Models.Product;
-import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.RowMapper;
-import org.springframework.mock.web.MockMultipartFile;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.*;
-import java.nio.file.Files;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -21,6 +15,7 @@ public class PrdouctMapper implements RowMapper<Product> {
             product.setName(resultSet.getString("name"));
             product.setDescription(resultSet.getString("description"));
             product.setPhoto(resultSet.getBytes("photo"));
+            product.setPrice(resultSet.getInt("price"));
         }
         catch (Exception e){
             System.out.println(e.getMessage());
